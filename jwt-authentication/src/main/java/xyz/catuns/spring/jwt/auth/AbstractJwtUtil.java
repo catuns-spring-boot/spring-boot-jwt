@@ -1,12 +1,15 @@
-package xyz.catuns.spring.jwt.core;
+package xyz.catuns.spring.jwt.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import xyz.catuns.spring.jwt.core.JwtUtil;
 import xyz.catuns.spring.jwt.core.exception.MissingSecretException;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.util.Date;
 
 public abstract class AbstractJwtUtil<T> implements JwtUtil<T> {
 
@@ -21,9 +24,16 @@ public abstract class AbstractJwtUtil<T> implements JwtUtil<T> {
 
     @Override
     public Claims getClaims(String token) {
-        SecretKey secretKey = getSecretKey();
+        SecretKey secretKey = this.getSecretKey();
         return Jwts.parser().verifyWith(secretKey).build()
                 .parseSignedClaims(token).getPayload();
+    }
+
+    @Override
+    public boolean isExpired(String token) {
+        Claims claims = this.getClaims(token);
+        Date expiration = claims.getExpiration();
+        return Instant.now().isAfter(expiration.toInstant());
     }
 
     protected SecretKey getSecretKey() {

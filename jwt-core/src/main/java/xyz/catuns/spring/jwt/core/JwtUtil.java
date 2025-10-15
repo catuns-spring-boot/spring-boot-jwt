@@ -30,4 +30,11 @@ public interface JwtUtil<T> {
      */
     Map<String, Object> getClaims(String token);
 
+    /**
+     * Determines whether the token is expired
+     * @param token token value
+     * @return boolean
+     */
+    boolean isExpired(String token);
+
 }
