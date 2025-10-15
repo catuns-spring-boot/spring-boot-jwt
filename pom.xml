@@ -21,7 +21,7 @@
         </license>
     </licenses>
     <modules>
-        <module>jwt-authentication</module>
+        <module>jwt-auth</module>
         <module>jwt-autoconfigure</module>
         <module>jwt-core</module>
         <module>jwt-dependencies</module>

@@ -10,7 +10,7 @@
         <relativePath>../jwt-dependencies/pom.xml</relativePath>
     </parent>
 
-    <artifactId>jwt-authentication</artifactId>
+    <artifactId>jwt-auth</artifactId>
 
     <properties>
         <main.basedir>${basedir}/..</main.basedir>
