@@ -24,16 +24,32 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
-    <modules>
-        <module>jwt-core</module>
-    </modules>
+
 
     <properties>
-        <spring-boot.version>3.5.6  </spring-boot.version>
+        <jjwt.version>0.12.6</jjwt.version>
+        <spring-boot.version>3.5.6</spring-boot.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Core jwt Dependencies -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
