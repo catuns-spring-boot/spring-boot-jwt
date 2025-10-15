@@ -22,6 +22,9 @@
     </licenses>
     <modules>
         <module>jwt-dependencies</module>
+        <module>jwt-core</module>
+        <module>jwt-config</module>
+        <module>jwt-domain</module>
     </modules>
     <scm>
         <url>${git.url}</url>
@@ -32,7 +35,7 @@
         <developer>
             <name>Devin</name>
             <email>ask@catuns.xyz</email>
-            <organization>Broadcom Inc.</organization>
+            <organization>DCAT Technologies.</organization>
             <organizationUrl>https://www.catuns.xyz</organizationUrl>
         </developer>
     </developers>

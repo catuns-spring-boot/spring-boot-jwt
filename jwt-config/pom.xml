@@ -10,8 +10,8 @@
         <relativePath>../jwt-dependencies/pom.xml</relativePath>
     </parent>
 
-    <artifactId>jwt-core</artifactId>
-    <name>JWT :: Core</name>
+    <artifactId>jwt-config</artifactId>
+    <name>JWT :: Config</name>
     <url>https://github.com/catuns-spring-boot/spring-boot-jwt</url>
     <organization>
         <name>DCAT Technologies.</name>
@@ -23,24 +23,5 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
-
-    <properties>
-        <main.basedir>${basedir}/..</main.basedir>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>jwt-dependencies</artifactId>
+    <name>JWT :: Dependencies</name>
     <packaging>pom</packaging>
 
     <url>https://github.com/catuns-spring-boot/spring-boot-jwt</url>
@@ -27,12 +28,34 @@
 
 
     <properties>
+        <main.basedir>${basedir}/..</main.basedir>
         <jjwt.version>0.12.6</jjwt.version>
+        <lombok.version>1.18.38</lombok.version>
+        <slugify.version>2.4</slugify.version>
         <spring-boot.version>3.5.6</spring-boot.version>
+        <spring-framework.version>6.5.5</spring-framework.version>
+        <spring-data.version>2025.0.4</spring-data.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Modules -->
+            <dependency>
+                <groupId>xyz.catuns.spring</groupId>
+                <artifactId>jwt-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>xyz.catuns.spring</groupId>
+                <artifactId>jwt-config</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>xyz.catuns.spring</groupId>
+                <artifactId>jwt-domain</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
             <!-- Core jwt Dependencies -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
@@ -50,11 +73,44 @@
                 <version>${jjwt.version}</version>
             </dependency>
 
+            <!-- Spring Framework -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>{spring-boot.version}</version>
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-bom</artifactId>
+                <version>${spring-data.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 3rd Party -->
+            <dependency>
+                <groupId>com.github.slugify</groupId>
+                <artifactId>slugify</artifactId>
+                <version>${slugify.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+    </dependencies>
 </project>
