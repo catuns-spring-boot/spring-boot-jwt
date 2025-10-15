@@ -7,5 +7,4 @@ public record JwtToken(
         Instant expiration,
         Instant issuedAt,
         String subject
-) {
-}
+) {}

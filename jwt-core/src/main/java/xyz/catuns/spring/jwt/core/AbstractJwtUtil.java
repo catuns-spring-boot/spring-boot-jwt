@@ -30,5 +30,4 @@ public abstract class AbstractJwtUtil<T> implements JwtUtil<T> {
         return Keys.hmacShaKeyFor(this.secret.getBytes(StandardCharsets.UTF_8));
     }
 
-
 }

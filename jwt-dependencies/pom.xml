@@ -47,7 +47,7 @@
             </dependency>
             <dependency>
                 <groupId>xyz.catuns.spring</groupId>
-                <artifactId>jwt-config</artifactId>
+                <artifactId>jwt-autoconfigure</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>

@@ -23,7 +23,7 @@
     <modules>
         <module>jwt-dependencies</module>
         <module>jwt-core</module>
-        <module>jwt-config</module>
+        <module>jwt-autoconfigure</module>
         <module>jwt-domain</module>
     </modules>
     <scm>
