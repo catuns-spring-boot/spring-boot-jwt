@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>xyz.catuns.spring</groupId>
+        <artifactId>spring-boot-jwt</artifactId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>jwt-dependencies</artifactId>
+    <packaging>pom</packaging>
+
+    <url>https://github.com/catuns-spring-boot/spring-boot-jwt</url>
+    <organization>
+        <name>DCAT Technologies.</name>
+        <url>https://www.catuns.xyz</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    <modules>
+        <module>jwt-core</module>
+    </modules>
+
+    <properties>
+        <spring-boot.version>3.5.6  </spring-boot.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>{spring-boot.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

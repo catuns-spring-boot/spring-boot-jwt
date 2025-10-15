@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>xyz.catuns.spring</groupId>
+    <artifactId>spring-boot-jwt</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+    <name>Spring boot JWT</name>
+    <description>Spring boot jwt libraries</description>
+    <url>https://github.com/catuns-spring-boot/spring-boot-jwt</url>
+    <organization>
+        <name>DCAT Technologies.</name>
+        <url>https://www.catuns.xyz</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    <modules>
+        <module>jwt-dependencies</module>
+    </modules>
+    <scm>
+        <url>${git.url}</url>
+        <connection>${git.connection}</connection>
+        <developerConnection>${git.developerConnection}</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <name>Devin</name>
+            <email>ask@catuns.xyz</email>
+            <organization>Broadcom Inc.</organization>
+            <organizationUrl>https://www.catuns.xyz</organizationUrl>
+        </developer>
+    </developers>
+
+    <properties>
+        <revision>1.0.0-SNAPSHOT</revision>
+        <git.url>https://github.com/catuns-spring-boot/effective-lamp-initializr</git.url>
+        <git.connection>scm:git:https://github.com/catuns-spring-boot/effective-lamp-initializr</git.connection>
+        <git.developerConnection>scm:git:ssh://git@github.com/catuns-spring-boot/effective-lamp-initializr.git</git.developerConnection>
+        <main.basedir>${basedir}</main.basedir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>3.1.4</version>
+                <inherited>false</inherited>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.5.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.4</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
