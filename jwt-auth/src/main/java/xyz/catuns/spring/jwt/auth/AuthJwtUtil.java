@@ -10,7 +10,6 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import xyz.catuns.spring.jwt.core.exception.MissingSecretException;
 import xyz.catuns.spring.jwt.core.exception.TokenValidationException;
 import xyz.catuns.spring.jwt.core.model.JwtToken;
-import xyz.catuns.spring.jwt.core.properties.JwtProperties;
 import xyz.catuns.spring.jwt.core.validator.TokenValidator;
 
 import java.time.Duration;
@@ -18,6 +17,12 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.Set;
 
+/**
+ * Creates {@link Authentication} from secret string
+ *
+ * Override {@link AuthJwtUtil#setCustomizer(JwtCustomizer)} to extend generator
+ * Override {@link AuthJwtUtil#setValidator(TokenValidator)} to extend validator
+ */
 public class AuthJwtUtil extends AbstractJwtUtil<Authentication> {
 
     public static final String AUTHORITIES_CLAIM_KEY = "authorities";
@@ -45,7 +50,7 @@ public class AuthJwtUtil extends AbstractJwtUtil<Authentication> {
     }
 
     /**
-     * Generates a JWT token using {@link JwtProperties#getExpiration()} duration
+     * Generates a JWT token using {@link Duration()} duration
      * @param auth auth
      * @return jwt token
      */
@@ -73,7 +78,6 @@ public class AuthJwtUtil extends AbstractJwtUtil<Authentication> {
         Claims claims = getClaims(token);
         String username = String.valueOf(claims.get(USER_CLAIM_KEY));
         String authorities = String.valueOf(claims.get(AUTHORITIES_CLAIM_KEY));
-
         validator.validate(claims);
         return new UsernamePasswordAuthenticationToken(username, null,
                 AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
