@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
-import xyz.catuns.spring.jwt.utils.Slugifier;
+import xyz.catuns.spring.jwt.domain.utils.Slugifier;
 
 import java.util.Objects;
 
@@ -26,11 +26,11 @@ public abstract class RoleEntity implements GrantedAuthority, Slugifier {
     protected String name;
 
     public void setName(String name) {
-        this.name = slugify(name);
+        this.name = slug(name);
     }
 
     @Override
-    public String slugify(String name) {
+    public String slug(String name) {
         return new Slugify()
                 .withUnderscoreSeparator(true)
                 .withLowerCase(false)

@@ -3,7 +3,7 @@ package xyz.catuns.spring.jwt.autoconfigure;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import xyz.catuns.spring.jwt.core.properties.JwtProperties;
+import xyz.catuns.spring.jwt.autoconfigure.properties.JwtProperties;
 
 /**
  * <h1>JWT Auto-Configuration</h1>

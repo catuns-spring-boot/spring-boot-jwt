@@ -1,4 +1,4 @@
-package xyz.catuns.spring.jwt.core.properties;
+package xyz.catuns.spring.jwt.autoconfigure.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
