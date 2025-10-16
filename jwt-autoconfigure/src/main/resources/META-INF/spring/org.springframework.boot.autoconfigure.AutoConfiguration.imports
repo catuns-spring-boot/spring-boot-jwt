@@ -1,3 +1,3 @@
 xyz.catuns.spring.jwt.autoconfigure.JwtAutoConfiguration
 xyz.catuns.spring.jwt.autoconfigure.JwtAuthenticationAutoConfiguration
-#xyz.catuns.spring.jwt.autoconfigure.JwtSecurityAutoConfiguration
+xyz.catuns.spring.jwt.autoconfigure.JwtSecurityAutoConfiguration
