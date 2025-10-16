@@ -36,10 +36,12 @@
         <dependency>
             <groupId>xyz.catuns.spring</groupId>
             <artifactId>jwt-auth</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>xyz.catuns.spring</groupId>
             <artifactId>jwt-security</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>

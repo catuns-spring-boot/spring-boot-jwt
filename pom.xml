@@ -27,6 +27,7 @@
         <module>jwt-dependencies</module>
         <module>jwt-domain</module>
         <module>jwt-security</module>
+        <module>spring-boot-starter-jwt</module>
     </modules>
     <scm>
         <url>${git.url}</url>

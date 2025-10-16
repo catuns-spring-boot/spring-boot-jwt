@@ -32,11 +32,8 @@ import xyz.catuns.spring.jwt.domain.repository.UserEntityRepository;
 @ConditionalOnProperty(prefix = "jwt.auth", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class JwtAuthenticationAutoConfiguration {
 
-    @Autowired(required = false)
-    private ApplicationContext applicationContext;
-
     public JwtAuthenticationAutoConfiguration(JwtAuthProperties  properties) {
-        log.debug("init JwtAuthenticationAutoConfiguration {}", properties);
+        log.debug("Registering JwtAuthenticationAutoConfiguration {}", properties);
     }
 
     /**

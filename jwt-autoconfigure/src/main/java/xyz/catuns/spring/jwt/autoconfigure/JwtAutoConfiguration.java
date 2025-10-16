@@ -26,7 +26,7 @@ public class JwtAutoConfiguration {
 
     public JwtAutoConfiguration(JwtProperties properties) {
         this.properties = properties;
-        log.debug("init JwtAutoConfiguration {}", properties);
+        log.debug("Registering JwtAutoConfiguration {}", this.properties);
     }
 
 }

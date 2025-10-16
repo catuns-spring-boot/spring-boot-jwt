@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>xyz.catuns.spring</groupId>
+        <artifactId>jwt-dependencies</artifactId>
+        <version>${revision}</version>
+        <relativePath>../jwt-dependencies/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>spring-boot-starter-jwt</artifactId>
+    <name>JWT :: Starter</name>
+    <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>xyz.catuns.spring</groupId>
+            <artifactId>jwt-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>xyz.catuns.spring</groupId>
+            <artifactId>jwt-auth</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>xyz.catuns.spring</groupId>
+            <artifactId>jwt-security</artifactId>
+        </dependency>
+
+        <!-- required in jwt-security -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>

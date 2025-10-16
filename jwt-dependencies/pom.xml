@@ -12,7 +12,6 @@
 
     <artifactId>jwt-dependencies</artifactId>
     <name>JWT :: Dependencies</name>
-
     <packaging>pom</packaging>
 
     <url>https://github.com/catuns-spring-boot/spring-boot-jwt</url>
@@ -64,6 +63,11 @@
             <dependency>
                 <groupId>xyz.catuns.spring</groupId>
                 <artifactId>jwt-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>xyz.catuns.spring</groupId>
+                <artifactId>spring-boot-starter-jwt</artifactId>
                 <version>${revision}</version>
             </dependency>
 
