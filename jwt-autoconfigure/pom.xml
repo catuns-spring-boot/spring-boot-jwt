@@ -33,6 +33,10 @@
             <groupId>xyz.catuns.spring</groupId>
             <artifactId>jwt-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>xyz.catuns.spring</groupId>
+            <artifactId>jwt-auth</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -45,6 +49,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
         </dependency>
     </dependencies>
 

@@ -21,6 +21,10 @@
             <groupId>xyz.catuns.spring</groupId>
             <artifactId>jwt-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>xyz.catuns.spring</groupId>
+            <artifactId>jwt-domain</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
