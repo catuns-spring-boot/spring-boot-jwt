@@ -61,6 +61,11 @@
                 <artifactId>jwt-domain</artifactId>
                 <version>${revision}</version>
             </dependency>
+            <dependency>
+                <groupId>xyz.catuns.spring</groupId>
+                <artifactId>jwt-security</artifactId>
+                <version>${revision}</version>
+            </dependency>
 
             <!-- Core jwt Dependencies -->
             <dependency>
@@ -80,11 +85,6 @@
             </dependency>
 
             <!-- Spring Framework -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>{spring-boot.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>

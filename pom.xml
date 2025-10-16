@@ -26,6 +26,7 @@
         <module>jwt-core</module>
         <module>jwt-dependencies</module>
         <module>jwt-domain</module>
+        <module>jwt-security</module>
     </modules>
     <scm>
         <url>${git.url}</url>
