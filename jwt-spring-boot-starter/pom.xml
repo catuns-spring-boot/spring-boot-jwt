@@ -10,7 +10,7 @@
         <relativePath>../jwt-dependencies/pom.xml</relativePath>
     </parent>
 
-    <artifactId>spring-boot-starter-jwt</artifactId>
+    <artifactId>jwt-spring-boot-starter</artifactId>
     <name>JWT :: Starter</name>
     <packaging>pom</packaging>
 
@@ -35,5 +35,4 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
 </project>

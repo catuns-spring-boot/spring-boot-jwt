@@ -20,14 +20,25 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
+    <properties>
+        <revision>1.0.0-SNAPSHOT</revision>
+        <git.url>https://github.com/catuns-spring-boot/effective-lamp-initializr</git.url>
+        <git.connection>scm:git:https://github.com/catuns-spring-boot/effective-lamp-initializr</git.connection>
+        <git.developerConnection>scm:git:ssh://git@github.com/catuns-spring-boot/effective-lamp-initializr.git</git.developerConnection>
+        <main.basedir>${basedir}</main.basedir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
     <modules>
-        <module>jwt-auth</module>
-        <module>jwt-autoconfigure</module>
-        <module>jwt-core</module>
         <module>jwt-dependencies</module>
+        <module>jwt-core</module>
         <module>jwt-domain</module>
+        <module>jwt-auth</module>
         <module>jwt-security</module>
-        <module>spring-boot-starter-jwt</module>
+        <module>jwt-autoconfigure</module>
+        <module>jwt-spring-boot-starter</module>
+        <module>jwt-spring-boot-starter-parent</module>
     </modules>
     <scm>
         <url>${git.url}</url>
@@ -43,19 +54,42 @@
         </developer>
     </developers>
 
-    <properties>
-        <revision>1.0.0-SNAPSHOT</revision>
-        <git.url>https://github.com/catuns-spring-boot/effective-lamp-initializr</git.url>
-        <git.connection>scm:git:https://github.com/catuns-spring-boot/effective-lamp-initializr</git.connection>
-        <git.developerConnection>scm:git:ssh://git@github.com/catuns-spring-boot/effective-lamp-initializr.git</git.developerConnection>
-        <main.basedir>${basedir}</main.basedir>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-    </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Devin Catuns' Spring Boot Maven Packages</name>
+            <url>https://maven.pkg.github.com/catuns-spring-boot/spring-boot-jwt</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.7.0</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>bom</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>

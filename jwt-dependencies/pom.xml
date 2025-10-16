@@ -14,7 +14,7 @@
     <name>JWT :: Dependencies</name>
     <packaging>pom</packaging>
 
-    <url>https://github.com/catuns-spring-boot/spring-boot-jwt</url>
+    <url>${git.url}</url>
     <organization>
         <name>DCAT Technologies.</name>
         <url>https://www.catuns.xyz</url>
@@ -26,9 +26,14 @@
         </license>
     </licenses>
 
+    <scm>
+        <url>${git.url}</url>
+        <connection>${git.connection}</connection>
+        <developerConnection>${git.developerConnection}</developerConnection>
+    </scm>
+
 
     <properties>
-        <main.basedir>${basedir}/..</main.basedir>
         <jjwt.version>0.12.6</jjwt.version>
         <lombok.version>1.18.38</lombok.version>
         <slugify.version>2.4</slugify.version>
@@ -67,7 +72,7 @@
             </dependency>
             <dependency>
                 <groupId>xyz.catuns.spring</groupId>
-                <artifactId>spring-boot-starter-jwt</artifactId>
+                <artifactId>jwt-spring-boot-starter</artifactId>
                 <version>${revision}</version>
             </dependency>
 
