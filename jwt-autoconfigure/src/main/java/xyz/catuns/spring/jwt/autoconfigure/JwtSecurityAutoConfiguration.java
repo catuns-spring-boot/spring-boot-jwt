@@ -55,7 +55,6 @@ import java.util.List;
 @EnableConfigurationProperties(JwtSecurityProperties.class)
 @ConditionalOnWebApplication
 @ConditionalOnClass(HttpSecurity.class)
-@ConditionalOnBean(JwtUtil.class)
 @ConditionalOnProperty(prefix = "jwt.security", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class JwtSecurityAutoConfiguration {
 

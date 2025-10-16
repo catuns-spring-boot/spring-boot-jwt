@@ -3,10 +3,12 @@ package xyz.catuns.spring.jwt.autoconfigure;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +32,7 @@ import xyz.catuns.spring.jwt.domain.repository.UserEntityRepository;
 @EnableConfigurationProperties(JwtAuthProperties.class)
 @ConditionalOnClass(AuthenticationManager.class)
 @ConditionalOnProperty(prefix = "jwt.auth", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ImportAutoConfiguration(exclude = UserDetailsServiceAutoConfiguration.class)
 public class JwtAuthenticationAutoConfiguration {
 
     public JwtAuthenticationAutoConfiguration(JwtAuthProperties  properties) {

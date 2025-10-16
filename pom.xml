@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>xyz.catuns.spring</groupId>
     <artifactId>spring-boot-jwt</artifactId>
@@ -64,14 +65,23 @@
     </distributionManagement>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>1.7.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.7.0</version>
+                <version>1.7.1</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
-                    <flattenMode>bom</flattenMode>
+                    <flattenMode>oss</flattenMode>
                 </configuration>
                 <executions>
                     <execution>
