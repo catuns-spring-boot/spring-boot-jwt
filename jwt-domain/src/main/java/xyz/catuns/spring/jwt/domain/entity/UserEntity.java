@@ -1,6 +1,8 @@
 package xyz.catuns.spring.jwt.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,6 +15,8 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.UUID;
 
+@Getter
+@Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class UserEntity implements UserDetails {
