@@ -15,6 +15,7 @@
     <packaging>pom</packaging>
 
     <properties>
+        <base.starter.version>1.0.0-SNAPSHOT</base.starter.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <google-jib.base.image>eclipse-temurin:21-jre-alpine</google-jib.base.image>
     </properties>
@@ -24,6 +25,12 @@
             <groupId>xyz.catuns.spring</groupId>
             <artifactId>jwt-spring-boot-starter</artifactId>
             <version>${revision}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>xyz.catuns.spring</groupId>
+            <artifactId>base-starter</artifactId>
+            <version>${base.starter.version}</version>
             <type>pom</type>
         </dependency>
         <dependency>
@@ -39,6 +46,13 @@
                 <groupId>xyz.catuns.spring</groupId>
                 <artifactId>jwt-dependencies</artifactId>
                 <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>xyz.catuns.spring</groupId>
+                <artifactId>base-dependencies</artifactId>
+                <version>${base.starter.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
