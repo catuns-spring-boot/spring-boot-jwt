@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <base.starter.version>1.0.1-SNAPSHOT</base.starter.version>
+        <base.starter.version>1.0.2-SNAPSHOT</base.starter.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <google-jib.base.image>eclipse-temurin:21-jre-alpine</google-jib.base.image>
     </properties>

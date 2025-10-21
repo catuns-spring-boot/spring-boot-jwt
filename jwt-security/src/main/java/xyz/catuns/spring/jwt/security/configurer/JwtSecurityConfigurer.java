@@ -9,7 +9,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
-import xyz.catuns.spring.jwt.core.JwtUtil;
+import xyz.catuns.spring.jwt.core.TokenProvider;
 import xyz.catuns.spring.jwt.security.filter.JwtExceptionHandlerFilter;
 import xyz.catuns.spring.jwt.security.filter.JwtTokenGeneratorFilter;
 import xyz.catuns.spring.jwt.security.filter.JwtTokenValidatorFilter;
@@ -53,14 +53,14 @@ public final class JwtSecurityConfigurer extends AbstractHttpConfigurer<JwtSecur
     /**
      * Configure JWT service and initialize default configurers
      */
-    public JwtSecurityConfigurer jwtUtil(JwtUtil<Authentication> jwtUtil) {
+    public JwtSecurityConfigurer jwtUtil(TokenProvider<Authentication> tokenProvider) {
 
         // Initialize default configurers if not already set
         if (this.filterConfigurer == null) {
-            this.filterConfigurer = new JwtFilterConfigurer(jwtUtil);
+            this.filterConfigurer = new JwtFilterConfigurer(tokenProvider);
         } else {
             // Update existing configurer with new service
-            this.filterConfigurer.setJwtUtil(jwtUtil);
+            this.filterConfigurer.setTokenProvider(tokenProvider);
         }
 
         if (this.exceptionConfigurer == null) {

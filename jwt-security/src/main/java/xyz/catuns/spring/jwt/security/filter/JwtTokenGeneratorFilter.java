@@ -11,7 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import xyz.catuns.spring.jwt.core.model.JwtToken;
-import xyz.catuns.spring.jwt.core.JwtUtil;
+import xyz.catuns.spring.jwt.core.TokenProvider;
 
 import java.io.IOException;
 import java.util.function.BiConsumer;
@@ -30,7 +30,7 @@ import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.BEAR
 @Slf4j
 public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
 
-    private final JwtUtil<Authentication> jwtUtil;
+    private final TokenProvider<Authentication> tokenProvider;
 
     /**
      * Set custom header name for JWT token
@@ -63,8 +63,8 @@ public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
     private BiConsumer<HttpServletResponse, JwtToken> tokenWriter = this::defaultTokenWriter;
 
 
-    public JwtTokenGeneratorFilter(JwtUtil<Authentication> jwtUtil) {
-        this.jwtUtil = jwtUtil;
+    public JwtTokenGeneratorFilter(TokenProvider<Authentication> tokenProvider) {
+        this.tokenProvider = tokenProvider;
     }
 
 
@@ -79,7 +79,7 @@ public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
 
         if (authentication != null && requiresGeneration.test(request)) {
             try {
-                JwtToken jwtToken = jwtUtil.generate(authentication);
+                JwtToken jwtToken = tokenProvider.generate(authentication);
                 tokenWriter.accept(response, jwtToken);
 
                 if (log.isDebugEnabled()) {

@@ -7,7 +7,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import xyz.catuns.spring.jwt.core.JwtUtil;
+import xyz.catuns.spring.jwt.core.TokenProvider;
 import xyz.catuns.spring.jwt.core.model.JwtToken;
 import xyz.catuns.spring.jwt.security.filter.JwtExceptionHandlerFilter;
 import xyz.catuns.spring.jwt.security.filter.JwtTokenGeneratorFilter;
@@ -28,7 +28,7 @@ public class JwtFilterConfigurer {
     public static final String BEARER_TOKEN_PREFIX = "Bearer ";
 
     @Setter
-    private JwtUtil<Authentication> jwtUtil;
+    private TokenProvider<Authentication> tokenProvider;
 
     // Validator config
     private String validatorHeaderName = AUTHORIZATION_KEY;
@@ -46,8 +46,8 @@ public class JwtFilterConfigurer {
     private HandlerExceptionResolver exceptionResolver;
     private boolean logExceptions = true;
 
-    public JwtFilterConfigurer(JwtUtil<Authentication> jwtUtil) {
-        this.jwtUtil = jwtUtil;
+    public JwtFilterConfigurer(TokenProvider<Authentication> tokenProvider) {
+        this.tokenProvider = tokenProvider;
     }
 
     // Validator configuration
@@ -109,7 +109,7 @@ public class JwtFilterConfigurer {
     // Builder methods
 
     public JwtTokenValidatorFilter buildValidator() {
-        JwtTokenValidatorFilter filter = new JwtTokenValidatorFilter(jwtUtil);
+        JwtTokenValidatorFilter filter = new JwtTokenValidatorFilter(tokenProvider);
         filter.setHeaderName(validatorHeaderName);
         filter.setTokenPrefix(validatorTokenPrefix);
         if (validatorPredicate != null) {
@@ -119,7 +119,7 @@ public class JwtFilterConfigurer {
     }
 
     public JwtTokenGeneratorFilter buildGenerator() {
-        JwtTokenGeneratorFilter filter = new JwtTokenGeneratorFilter(jwtUtil);
+        JwtTokenGeneratorFilter filter = new JwtTokenGeneratorFilter(tokenProvider);
         filter.setTokenHeaderName(generatorTokenHeader);
         filter.setExpirationHeaderName(generatorExpirationHeader);
         filter.setTokenPrefix(generatorTokenPrefix);

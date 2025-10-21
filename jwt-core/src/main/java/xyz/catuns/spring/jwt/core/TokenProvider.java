@@ -6,7 +6,7 @@ import xyz.catuns.spring.jwt.core.model.JwtToken;
 import java.util.Map;
 
 
-public interface JwtUtil<T> {
+public interface TokenProvider<T> {
 
     /**
      * Generates a JWT token

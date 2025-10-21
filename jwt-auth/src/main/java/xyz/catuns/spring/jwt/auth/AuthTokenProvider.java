@@ -20,10 +20,10 @@ import java.util.Set;
 /**
  * Creates {@link Authentication} from secret string
  *
- * Override {@link AuthJwtUtil#setCustomizer(JwtCustomizer)} to extend generator
- * Override {@link AuthJwtUtil#setValidator(TokenValidator)} to extend validator
+ * Override {@link AuthTokenProvider#setCustomizer(JwtCustomizer)} to extend generator
+ * Override {@link AuthTokenProvider#setValidator(TokenValidator)} to extend validator
  */
-public class AuthJwtUtil extends AbstractJwtUtil<Authentication> {
+public class AuthTokenProvider extends AbstractTokenProvider<Authentication> {
 
     public static final String AUTHORITIES_CLAIM_KEY = "authorities";
     public static final String USER_CLAIM_KEY = "user";
@@ -43,7 +43,7 @@ public class AuthJwtUtil extends AbstractJwtUtil<Authentication> {
     @Setter
     private TokenValidator<Claims> validator = TokenValidator.withDefaults();
 
-    public AuthJwtUtil(String secret, String issuer, Duration expiration) throws MissingSecretException {
+    public AuthTokenProvider(String secret, String issuer, Duration expiration) throws MissingSecretException {
         super(secret);
         this.issuer = issuer;
         this.expiration = expiration;
