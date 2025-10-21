@@ -12,7 +12,6 @@
 
     <artifactId>jwt-spring-boot-starter</artifactId>
     <name>JWT :: Starter</name>
-    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>

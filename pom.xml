@@ -22,7 +22,7 @@
         </license>
     </licenses>
     <properties>
-        <revision>1.0.0-SNAPSHOT</revision>
+        <revision>1.0.1-SNAPSHOT</revision>
         <git.url>https://github.com/catuns-spring-boot/effective-lamp-initializr</git.url>
         <git.connection>scm:git:https://github.com/catuns-spring-boot/effective-lamp-initializr</git.connection>
         <git.developerConnection>scm:git:ssh://git@github.com/catuns-spring-boot/effective-lamp-initializr.git</git.developerConnection>
@@ -58,7 +58,7 @@
 
     <distributionManagement>
         <repository>
-            <id>github</id>
+            <id>jwt-starter</id>
             <name>Devin Catuns' Spring Boot Maven Packages</name>
             <url>https://maven.pkg.github.com/catuns-spring-boot/spring-boot-jwt</url>
         </repository>
