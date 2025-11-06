@@ -35,7 +35,7 @@ public class AuthTokenProvider extends AbstractTokenProvider<Authentication> {
      * Set customizer prior to token generation
      */
     @Setter
-    private JwtCustomizer customizer = JwtCustomizer.withDefaults();
+    private JwtCustomizer<Authentication> customizer = JwtCustomizer.withDefaults();
 
     /**
      * Set customizer prior to token generation
@@ -64,7 +64,7 @@ public class AuthTokenProvider extends AbstractTokenProvider<Authentication> {
                 .subject(auth.getName())
                 .claim(USER_CLAIM_KEY, auth.getPrincipal())
                 .claim(AUTHORITIES_CLAIM_KEY, String.join(",", authoritiesList));
-        customizer.customize(jwtBuilder);
+        customizer.customize(jwtBuilder, auth);
         String token = jwtBuilder.issuedAt(Date.from(now))
                 .expiration(Date.from(expiration))
                 .signWith(getSecretKey())
