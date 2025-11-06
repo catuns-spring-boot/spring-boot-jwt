@@ -19,7 +19,7 @@ import java.util.Set;
 
 /**
  * Creates {@link Authentication} from secret string
- *
+ * <p>
  * Override {@link AuthTokenProvider#setCustomizer(JwtCustomizer)} to extend generator
  * Override {@link AuthTokenProvider#setValidator(TokenValidator)} to extend validator
  */
@@ -29,13 +29,6 @@ public class AuthTokenProvider extends AbstractTokenProvider<Authentication> {
     public static final String USER_CLAIM_KEY = "user";
 
     private final String issuer;
-    private final Duration expiration;
-
-    /**
-     * Set customizer prior to token generation
-     */
-    @Setter
-    private JwtCustomizer<Authentication> customizer = JwtCustomizer.withDefaults();
 
     /**
      * Set customizer prior to token generation
@@ -44,33 +37,15 @@ public class AuthTokenProvider extends AbstractTokenProvider<Authentication> {
     private TokenValidator<Claims> validator = TokenValidator.withDefaults();
 
     public AuthTokenProvider(String secret, String issuer, Duration expiration) throws MissingSecretException {
-        super(secret);
+        super(secret, expiration);
         this.issuer = issuer;
-        this.expiration = expiration;
-    }
-
-    /**
-     * Generates a JWT token using {@link Duration()} duration
-     * @param auth auth
-     * @return jwt token
-     */
-    @Override
-    public JwtToken generate(Authentication auth) {
-        Instant now = Instant.now();
-        Instant expiration = now.plus(this.expiration);
-        Set<String> authoritiesList = AuthorityUtils.authorityListToSet(auth.getAuthorities());
-        JwtBuilder jwtBuilder = Jwts.builder()
-                .issuer(this.issuer)
+        this.setCustomizer((jwt, auth) -> {
+            Set<String> authoritiesList = AuthorityUtils.authorityListToSet(auth.getAuthorities());
+            jwt.issuer(this.issuer)
                 .subject(auth.getName())
                 .claim(USER_CLAIM_KEY, auth.getPrincipal())
                 .claim(AUTHORITIES_CLAIM_KEY, String.join(",", authoritiesList));
-        customizer.customize(jwtBuilder, auth);
-        String token = jwtBuilder.issuedAt(Date.from(now))
-                .expiration(Date.from(expiration))
-                .signWith(getSecretKey())
-                .compact();
-
-        return new JwtToken(token, expiration, now, auth.getName());
+        });
     }
 
     @Override
