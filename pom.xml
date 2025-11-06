@@ -39,7 +39,6 @@
         <module>jwt-security</module>
         <module>jwt-autoconfigure</module>
         <module>jwt-spring-boot-starter</module>
-        <module>jwt-spring-boot-starter-parent</module>
     </modules>
     <scm>
         <url>${git.url}</url>
