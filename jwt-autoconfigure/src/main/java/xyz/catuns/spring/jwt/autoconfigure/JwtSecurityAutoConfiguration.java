@@ -168,7 +168,7 @@ public class JwtSecurityAutoConfiguration {
             HttpSecurity http,
             JwtFilterConfigurer filterConfigurer,
             JwtExceptionHandlingConfigurer exceptionConfigurer,
-            CorsConfigurationSource corsConfigurationSource
+            @Qualifier("corsConfigurationSource") CorsConfigurationSource corsConfigurationSource
     ) throws Exception {
 
         log.debug("Registering SecurityFilterChain");
