@@ -1,5 +1,9 @@
 package xyz.catuns.spring.jwt.autoconfigure.annotation;
 
+import org.springframework.context.annotation.Import;
+import xyz.catuns.spring.jwt.autoconfigure.JwtAuthenticationAutoConfiguration;
+import xyz.catuns.spring.jwt.autoconfigure.JwtSecurityAutoConfiguration;
+
 import java.lang.annotation.*;
 
 /**
@@ -20,5 +24,9 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@Import({
+        JwtSecurityAutoConfiguration.class,
+        JwtAuthenticationAutoConfiguration.class
+})
 public @interface EnableJwtSecurity {
 }
