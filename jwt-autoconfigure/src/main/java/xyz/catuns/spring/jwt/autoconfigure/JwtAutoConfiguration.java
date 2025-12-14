@@ -5,10 +5,8 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.Authentication;
-import xyz.catuns.spring.jwt.auth.AuthJwtUtil;
+import xyz.catuns.spring.jwt.auth.AuthTokenProvider;
 import xyz.catuns.spring.jwt.autoconfigure.properties.JwtProperties;
-import xyz.catuns.spring.jwt.core.JwtUtil;
 import xyz.catuns.spring.jwt.core.exception.MissingSecretException;
 
 /**
@@ -36,9 +34,9 @@ public class JwtAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean(AuthJwtUtil.class)
-    public AuthJwtUtil defaultJwtUtil() throws MissingSecretException {
-        return new AuthJwtUtil(properties.getSecret(), properties.getIssuer(), properties.getExpiration());
+    @ConditionalOnMissingBean(AuthTokenProvider.class)
+    public AuthTokenProvider defaultJwtUtil() throws MissingSecretException {
+        return new AuthTokenProvider(properties.getSecret(), properties.getIssuer(), properties.getExpiration());
     }
 
 }

@@ -20,7 +20,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import xyz.catuns.spring.jwt.security.properties.JwtSecurityProperties;
 import xyz.catuns.spring.jwt.security.OrderedSecurityFilterChain;
-import xyz.catuns.spring.jwt.core.JwtUtil;
+import xyz.catuns.spring.jwt.core.TokenProvider;
 import xyz.catuns.spring.jwt.security.exception.handler.JwtAccessDeniedHandler;
 import xyz.catuns.spring.jwt.security.exception.handler.JwtAuthenticationEntryPoint;
 import xyz.catuns.spring.jwt.security.configurer.JwtExceptionHandlingConfigurer;
@@ -130,11 +130,11 @@ public class JwtSecurityAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(JwtFilterConfigurer.class)
     public JwtFilterConfigurer filterConfigurer(
-            JwtUtil<Authentication> jwtUtil,
+            TokenProvider<Authentication> tokenProvider,
             @Qualifier("handlerExceptionResolver") HandlerExceptionResolver resolver
     ) {
         log.debug("Registering JwtFilterConfigurer");
-        return new JwtFilterConfigurer(jwtUtil)
+        return new JwtFilterConfigurer(tokenProvider)
                 .validatorHeaderName(properties.getValidation().getHeaderName())
                 .validatorTokenPrefix(properties.getValidation().getTokenPrefix())
                 .generatorTokenHeader(properties.getGeneration().getHeaderName())
@@ -168,7 +168,7 @@ public class JwtSecurityAutoConfiguration {
             HttpSecurity http,
             JwtFilterConfigurer filterConfigurer,
             JwtExceptionHandlingConfigurer exceptionConfigurer,
-            CorsConfigurationSource corsConfigurationSource
+            @Qualifier("corsConfigurationSource") CorsConfigurationSource corsConfigurationSource
     ) throws Exception {
 
         log.debug("Registering SecurityFilterChain");

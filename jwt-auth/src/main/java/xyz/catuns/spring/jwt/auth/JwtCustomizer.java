@@ -3,12 +3,12 @@ package xyz.catuns.spring.jwt.auth;
 import io.jsonwebtoken.JwtBuilder;
 
 @FunctionalInterface
-public interface JwtCustomizer {
+public interface JwtCustomizer<T> {
 
-    void customize(JwtBuilder jwt);
+    void customize(JwtBuilder jwt, T t);
 
-    static  JwtCustomizer withDefaults() {
-        return (t) -> {
+    static <T> JwtCustomizer<T> withDefaults() {
+        return (jwt, t) -> {
         };
     }
 }

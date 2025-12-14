@@ -13,8 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-import xyz.catuns.spring.jwt.core.JwtUtil;
-import xyz.catuns.spring.jwt.core.exception.TokenValidationException;
+import xyz.catuns.spring.jwt.core.TokenProvider;
 import xyz.catuns.spring.jwt.security.exception.JwtSecurityException;
 import xyz.catuns.spring.jwt.security.exception.TokenExpiredException;
 
@@ -28,7 +27,7 @@ import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.BEAR
 @RequiredArgsConstructor
 public class JwtTokenValidatorFilter extends OncePerRequestFilter {
 
-    private final JwtUtil<Authentication> jwtUtil;
+    private final TokenProvider<Authentication> tokenProvider;
 
     /**
      *
@@ -69,7 +68,7 @@ public class JwtTokenValidatorFilter extends OncePerRequestFilter {
             String token = extractToken(request);
 
             if (token != null) {
-                Authentication authentication = jwtUtil.validate(token);
+                Authentication authentication = tokenProvider.validate(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
                 if (log.isDebugEnabled()) {
@@ -77,7 +76,7 @@ public class JwtTokenValidatorFilter extends OncePerRequestFilter {
                 }
             }
 
-            Authentication authentication = jwtUtil.validate(token);
+            Authentication authentication = tokenProvider.validate(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (ExpiredJwtException exception) {
             log.debug("Jwt expired {}", exception.toString());
