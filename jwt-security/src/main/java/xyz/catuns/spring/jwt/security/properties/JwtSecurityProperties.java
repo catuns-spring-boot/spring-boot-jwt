@@ -9,13 +9,10 @@ import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.BEAR
 
 
 /**
- *
- *
  * @author Devin Catuns
  * @since 1.0.0
  */
 @Data
-@ConfigurationProperties(prefix = "jwt.security")
 public class JwtSecurityProperties {
 
     public static final int DEFAULT_FILTER_ORDER = -100;

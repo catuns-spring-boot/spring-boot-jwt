@@ -22,7 +22,7 @@
         </license>
     </licenses>
     <properties>
-        <revision>1.0.2-SNAPSHOT</revision>
+        <revision>1.0.3-SNAPSHOT</revision>
         <git.url>https://github.com/catuns-spring-boot/effective-lamp-initializr</git.url>
         <git.connection>scm:git:https://github.com/catuns-spring-boot/effective-lamp-initializr</git.connection>
         <git.developerConnection>scm:git:ssh://git@github.com/catuns-spring-boot/effective-lamp-initializr.git</git.developerConnection>

@@ -1,5 +1,8 @@
 package xyz.catuns.spring.jwt.autoconfigure.annotation;
 
+import org.springframework.context.annotation.Import;
+import xyz.catuns.spring.jwt.autoconfigure.registrar.JwtDomainRegistrar;
+
 import java.lang.annotation.*;
 
 /**
@@ -20,6 +23,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@Import(JwtDomainRegistrar.class)
 public @interface EnableJwtDomain {
 
     /**
