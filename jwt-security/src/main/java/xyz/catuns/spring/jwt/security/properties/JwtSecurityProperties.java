@@ -3,9 +3,7 @@ package xyz.catuns.spring.jwt.security.properties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.AUTHORIZATION_KEY;
-import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.TOKEN_EXPIRATION_KEY;
-import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.BEARER_TOKEN_PREFIX;
+import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.*;
 
 
 /**
@@ -13,6 +11,7 @@ import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.BEAR
  * @since 1.0.0
  */
 @Data
+@ConfigurationProperties(prefix = "jwt.security")
 public class JwtSecurityProperties {
 
     public static final int DEFAULT_FILTER_ORDER = -100;

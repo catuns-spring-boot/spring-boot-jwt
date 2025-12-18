@@ -10,6 +10,7 @@ import java.util.List;
  * Jwt Entity domain properties
  */
 @Data
+@ConfigurationProperties(prefix = "jwt.entity")
 public class JwtDomainProperties {
 
     private boolean enabled = true;

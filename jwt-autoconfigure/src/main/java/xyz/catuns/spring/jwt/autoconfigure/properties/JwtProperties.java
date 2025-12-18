@@ -42,17 +42,4 @@ public class JwtProperties {
     @NestedConfigurationProperty
     private JwtDomainProperties entity = new JwtDomainProperties();
 
-    /*
-     * Jwt Security Properties
-     */
-    @NestedConfigurationProperty
-    private JwtSecurityProperties security = new JwtSecurityProperties();
-
-    /*
-     * Jwt Auth Properties
-     */
-    @NestedConfigurationProperty
-    private JwtAuthProperties auth = new JwtAuthProperties();
-
-
 }

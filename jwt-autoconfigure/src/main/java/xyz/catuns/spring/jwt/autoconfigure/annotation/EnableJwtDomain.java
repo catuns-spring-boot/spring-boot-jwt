@@ -1,7 +1,9 @@
 package xyz.catuns.spring.jwt.autoconfigure.annotation;
 
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
 import xyz.catuns.spring.jwt.autoconfigure.registrar.JwtDomainRegistrar;
+import xyz.catuns.spring.jwt.domain.properties.JwtDomainProperties;
 
 import java.lang.annotation.*;
 
@@ -24,6 +26,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import(JwtDomainRegistrar.class)
+@EnableConfigurationProperties(JwtDomainProperties.class)
 public @interface EnableJwtDomain {
 
     /**

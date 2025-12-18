@@ -18,6 +18,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import xyz.catuns.spring.jwt.autoconfigure.properties.JwtProperties;
 import xyz.catuns.spring.jwt.security.properties.JwtSecurityProperties;
 import xyz.catuns.spring.jwt.security.OrderedSecurityFilterChain;
 import xyz.catuns.spring.jwt.core.TokenProvider;
@@ -158,6 +159,15 @@ public class JwtSecurityAutoConfiguration {
                 .accessDeniedHandler(jwtAccessDeniedHandler)
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint);
     }
+
+    /**
+     * Default JwtSecurityConfigurer
+     */
+    @Bean
+    @ConditionalOnMissingBean(JwtSecurityConfigurer.class)
+    public JwtSecurityConfigurer defaultJwtSecurityConfigurer() {
+        return JwtSecurityConfigurer.jwt();
+    }
     /**
      * Default JWT Security Filter Chain
      */
@@ -168,12 +178,13 @@ public class JwtSecurityAutoConfiguration {
             HttpSecurity http,
             JwtFilterConfigurer filterConfigurer,
             JwtExceptionHandlingConfigurer exceptionConfigurer,
+            JwtSecurityConfigurer jwtSecurityConfigurer,
             @Qualifier("corsConfigurationSource") CorsConfigurationSource corsConfigurationSource
     ) throws Exception {
 
         log.debug("Registering SecurityFilterChain");
         // Apply JWT configurer
-        http.with(JwtSecurityConfigurer.jwt(), jwt -> {
+        http.with(jwtSecurityConfigurer, jwt -> {
             jwt.exceptionConfigurer(() -> exceptionConfigurer);
             jwt.filterConfigurer(() -> filterConfigurer);
 
@@ -205,6 +216,7 @@ public class JwtSecurityAutoConfiguration {
             }
             auth.anyRequest().authenticated();
         });
+
         DefaultSecurityFilterChain chain = http.build();
         int order = properties.getFilter().getOrder();
         return new OrderedSecurityFilterChain(chain, order);

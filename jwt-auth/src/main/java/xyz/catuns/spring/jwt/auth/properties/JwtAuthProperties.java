@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @since 1.0.0
  */
 @Data
+@ConfigurationProperties(prefix = "jwt.auth")
 public class JwtAuthProperties {
 
     /**
