@@ -1,6 +1,6 @@
 package xyz.catuns.spring.jwt.core.exception;
 
-public class TokenValidationException extends JwtException {
+public class TokenValidationException extends JwtSecurityException {
 
     public TokenValidationException(String message, Throwable cause) {
         super(message, cause);

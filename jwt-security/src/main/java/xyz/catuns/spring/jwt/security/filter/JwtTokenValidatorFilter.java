@@ -14,7 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import xyz.catuns.spring.jwt.core.provider.TokenProvider;
-import xyz.catuns.spring.jwt.security.exception.JwtSecurityException;
+import xyz.catuns.spring.jwt.core.exception.JwtSecurityException;
 import xyz.catuns.spring.jwt.security.exception.TokenExpiredException;
 
 import java.io.IOException;

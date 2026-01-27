@@ -5,7 +5,7 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.Setter;
-import xyz.catuns.spring.jwt.core.exception.JwtException;
+import xyz.catuns.spring.jwt.core.exception.JwtSecurityException;
 import xyz.catuns.spring.jwt.core.exception.TokenValidationException;
 import xyz.catuns.spring.jwt.core.model.JwtToken;
 
@@ -33,7 +33,7 @@ public abstract class TokenProviderImpl<T> implements TokenProvider<T> {
 
     public TokenProviderImpl(String secret, Duration expiration, String issuer, TokenGenerator<T> customizer, TokenValidator<T> validator) {
         if (secret == null || secret.isEmpty()) {
-            throw new JwtException("missing secret");
+            throw new JwtSecurityException("missing secret");
         }
         this.secret = secret;
         this.expiration = expiration;
