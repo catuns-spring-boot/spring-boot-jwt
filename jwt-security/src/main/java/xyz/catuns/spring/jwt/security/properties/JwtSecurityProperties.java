@@ -3,14 +3,10 @@ package xyz.catuns.spring.jwt.security.properties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.AUTHORIZATION_KEY;
-import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.TOKEN_EXPIRATION_KEY;
-import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.BEARER_TOKEN_PREFIX;
+import static xyz.catuns.spring.jwt.security.configurer.JwtFilterConfigurer.*;
 
 
 /**
- *
- *
  * @author Devin Catuns
  * @since 1.0.0
  */

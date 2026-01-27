@@ -21,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import xyz.catuns.spring.jwt.auth.properties.JwtAuthProperties;
 import xyz.catuns.spring.jwt.auth.provider.UsernamePwdAuthenticationProvider;
 import xyz.catuns.spring.jwt.auth.service.UserEntityService;
+import xyz.catuns.spring.jwt.autoconfigure.properties.JwtProperties;
 import xyz.catuns.spring.jwt.domain.DomainMetadata;
 import xyz.catuns.spring.jwt.domain.repository.UserEntityRepository;
 
@@ -35,7 +36,7 @@ import xyz.catuns.spring.jwt.domain.repository.UserEntityRepository;
 @ImportAutoConfiguration(exclude = UserDetailsServiceAutoConfiguration.class)
 public class JwtAuthenticationAutoConfiguration {
 
-    public JwtAuthenticationAutoConfiguration(JwtAuthProperties  properties) {
+    public JwtAuthenticationAutoConfiguration(JwtAuthProperties properties) {
         log.debug("Registering JwtAuthenticationAutoConfiguration {}", properties);
     }
 
@@ -94,10 +95,10 @@ public class JwtAuthenticationAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(AuthenticationProvider.class)
     @ConditionalOnBean({UserEntityService.class})
-    public AuthenticationProvider usernamePasswordAuthenticationProvider(
+    public AuthenticationProvider defaultUsernamePasswordAuthenticationProvider(
             UserEntityService<?> userDetailsService,
             PasswordEncoder passwordEncoder) {
-        log.debug("Registering UsernamePwdAuthenticationProvider");
+        log.debug("Registering Default UsernamePwdAuthenticationProvider");
         return new UsernamePwdAuthenticationProvider(userDetailsService, passwordEncoder);
     }
 
