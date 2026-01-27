@@ -34,3 +34,11 @@ jobs:
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Send Discord notification
+      uses: ./.github/actions/send-discord-notification
+      if: always()
+      with:
+        webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        status: ${{ job.status }}
+        run-name: ${{ format('spring-boot-base | {0}', github.ref_name) }}
