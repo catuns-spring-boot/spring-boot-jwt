@@ -27,4 +27,11 @@
     <properties>
         <main.basedir>${basedir}/..</main.basedir>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+        </dependency>
+    </dependencies>
 </project>

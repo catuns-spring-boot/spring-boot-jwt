@@ -22,7 +22,7 @@
         </license>
     </licenses>
     <properties>
-        <revision>1.0.3-SNAPSHOT</revision>
+        <revision>1.0.4-SNAPSHOT</revision>
         <git.url>https://github.com/catuns-spring-boot/effective-lamp-initializr</git.url>
         <git.connection>scm:git:https://github.com/catuns-spring-boot/effective-lamp-initializr</git.connection>
         <git.developerConnection>scm:git:ssh://git@github.com/catuns-spring-boot/effective-lamp-initializr.git</git.developerConnection>
@@ -54,22 +54,31 @@
         </developer>
     </developers>
 
+    <profiles>
+        <profile>
+            <id>repolite</id>
+            <distributionManagement>
+                <repository>
+                    <id>repolite-releases</id>
+                    <name>Catuns RepoLite releases</name>
+                    <url>https://repolite.catuns.xyz/releases</url>
+                </repository>
+                <snapshotRepository>
+                    <id>repolite-snapshots</id>
+                    <name>Catuns RepoLite</name>
+                    <url>https://repolite.catuns.xyz/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+
+    </profiles>
+
     <distributionManagement>
         <repository>
-            <id>repolite-releases</id>
-            <name>Catuns RepoLite releases</name>
-            <url>https://repolite.catuns.xyz/releases</url>
+            <id>jwt-starter</id>
+            <name>Devin Catuns' Spring Boot Maven Packages</name>
+            <url>https://maven.pkg.github.com/catuns-spring-boot/spring-boot-jwt</url>
         </repository>
-        <snapshotRepository>
-            <id>repolite-snapshots</id>
-            <name>Catuns RepoLite</name>
-            <url>https://repolite.catuns.xyz/snapshots</url>
-        </snapshotRepository>
-<!--        <repository>-->
-<!--            <id>jwt-starter</id>-->
-<!--            <name>Devin Catuns' Spring Boot Maven Packages</name>-->
-<!--            <url>https://maven.pkg.github.com/catuns-spring-boot/spring-boot-jwt</url>-->
-<!--        </repository>-->
     </distributionManagement>
 
     <build>

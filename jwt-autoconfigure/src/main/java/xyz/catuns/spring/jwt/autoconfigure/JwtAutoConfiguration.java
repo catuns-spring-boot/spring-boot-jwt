@@ -35,7 +35,7 @@ public class JwtAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(AuthTokenProvider.class)
-    public AuthTokenProvider defaultJwtUtil() throws MissingSecretException {
+    public AuthTokenProvider defaultJwtUtil() {
         return new AuthTokenProvider(properties.getSecret(), properties.getIssuer(), properties.getExpiration());
     }
 

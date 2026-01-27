@@ -1,61 +1,62 @@
 package xyz.catuns.spring.jwt.auth;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import lombok.Setter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import xyz.catuns.spring.jwt.core.exception.MissingSecretException;
-import xyz.catuns.spring.jwt.core.exception.TokenValidationException;
-import xyz.catuns.spring.jwt.core.model.JwtToken;
-import xyz.catuns.spring.jwt.core.validator.TokenValidator;
+import xyz.catuns.spring.jwt.core.provider.TokenGenerator;
+import xyz.catuns.spring.jwt.core.provider.TokenProviderImpl;
+import xyz.catuns.spring.jwt.core.provider.TokenValidator;
 
 import java.time.Duration;
-import java.time.Instant;
-import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
  * Creates {@link Authentication} from secret string
  * <p>
- * Override {@link AuthTokenProvider#setCustomizer(JwtCustomizer)} to extend generator
+ * Override {@link AuthTokenProvider#setCustomizer(TokenGenerator)} to extend generator
  * Override {@link AuthTokenProvider#setValidator(TokenValidator)} to extend validator
  */
-public class AuthTokenProvider extends AbstractTokenProvider<Authentication> {
+public class AuthTokenProvider extends TokenProviderImpl<Authentication> {
 
     public static final String AUTHORITIES_CLAIM_KEY = "authorities";
     public static final String USER_CLAIM_KEY = "user";
 
-    private final String issuer;
+    public static TokenValidator<Authentication> defaultTokenValidator() {
+        return (claims) -> {
+            String username = String.valueOf(claims.getSubject());
+            String authorities = String.valueOf(claims.get(AUTHORITIES_CLAIM_KEY));
+            if (username == null || username.isEmpty()) {
+                throw new IllegalArgumentException("missing username in claims");
+            }
+            List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
+            return new UsernamePasswordAuthenticationToken(username, null, grantedAuthorities);
+        };
+    }
 
-    /**
-     * Set customizer prior to token generation
-     */
-    @Setter
-    private TokenValidator<Claims> validator = TokenValidator.withDefaults();
+    public static TokenGenerator<Authentication> defaultTokenGenerator() {
+        return (jwt, auth) -> {
+            Set<String> authoritiesList = AuthorityUtils.authorityListToSet(auth.getAuthorities());
+            jwt.subject(auth.getName())
+                    .claim(USER_CLAIM_KEY, auth.getName())
+                    .claim(AUTHORITIES_CLAIM_KEY, String.join(",", authoritiesList));
+        };
+    }
 
-    public AuthTokenProvider(String secret, String issuer, Duration expiration) throws MissingSecretException {
-        super(secret, expiration);
-        this.issuer = issuer;
+
+    public AuthTokenProvider(String secret, Duration expiration, String issuer, TokenGenerator<Authentication> customizer, TokenValidator<Authentication> validator) {
+        super(secret, expiration, issuer, customizer, validator);
+    }
+
+    public AuthTokenProvider(String secret, String issuer, Duration expiration) {
+        super(secret, expiration, issuer, defaultTokenGenerator(), defaultTokenValidator());
         this.setCustomizer((jwt, auth) -> {
             Set<String> authoritiesList = AuthorityUtils.authorityListToSet(auth.getAuthorities());
-            jwt.issuer(this.issuer)
+            jwt
                 .subject(auth.getName())
                 .claim(USER_CLAIM_KEY, auth.getPrincipal())
                 .claim(AUTHORITIES_CLAIM_KEY, String.join(",", authoritiesList));
         });
     }
-
-    @Override
-    public Authentication validate(String token) throws TokenValidationException {
-        Claims claims = getClaims(token);
-        String username = String.valueOf(claims.get(USER_CLAIM_KEY));
-        String authorities = String.valueOf(claims.get(AUTHORITIES_CLAIM_KEY));
-        validator.validate(claims);
-        return new UsernamePasswordAuthenticationToken(username, null,
-                AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
-    }
-
 }

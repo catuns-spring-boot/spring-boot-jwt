@@ -1,9 +1,11 @@
-package xyz.catuns.spring.jwt.core;
+package xyz.catuns.spring.jwt.core.provider;
 
+import io.jsonwebtoken.Claims;
 import xyz.catuns.spring.jwt.core.exception.TokenValidationException;
 import xyz.catuns.spring.jwt.core.model.JwtToken;
 
-import java.util.Map;
+import java.time.Instant;
+import java.util.Date;
 
 
 public interface TokenProvider<T> {
@@ -28,13 +30,17 @@ public interface TokenProvider<T> {
      * @param token JWT token
      * @return claims as a Map
      */
-    Map<String, Object> getClaims(String token);
+    Claims getClaims(String token);
 
     /**
      * Determines whether the token is expired
      * @param token token value
      * @return boolean
      */
-    boolean isExpired(String token);
+    default boolean isExpired(String token) {
+        Claims claims = this.getClaims(token);
+        Date expiration = claims.getExpiration();
+        return Instant.now().isAfter(expiration.toInstant());
+    }
 
 }
