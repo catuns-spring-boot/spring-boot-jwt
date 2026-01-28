@@ -51,12 +51,5 @@ public class AuthTokenProvider extends TokenProviderImpl<Authentication> {
 
     public AuthTokenProvider(String secret, String issuer, Duration expiration) {
         super(secret, expiration, issuer, defaultTokenGenerator(), defaultTokenValidator());
-        this.setCustomizer((jwt, auth) -> {
-            Set<String> authoritiesList = AuthorityUtils.authorityListToSet(auth.getAuthorities());
-            jwt
-                .subject(auth.getName())
-                .claim(USER_CLAIM_KEY, auth.getPrincipal())
-                .claim(AUTHORITIES_CLAIM_KEY, String.join(",", authoritiesList));
-        });
     }
 }
