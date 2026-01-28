@@ -53,7 +53,7 @@ public final class JwtSecurityConfigurer extends AbstractHttpConfigurer<JwtSecur
     /**
      * Configure JWT service and initialize default configurers
      */
-    public JwtSecurityConfigurer jwtUtil(TokenProvider<Authentication> tokenProvider) {
+    public JwtSecurityConfigurer tokenProvider(TokenProvider<Authentication> tokenProvider) {
 
         // Initialize default configurers if not already set
         if (this.filterConfigurer == null) {

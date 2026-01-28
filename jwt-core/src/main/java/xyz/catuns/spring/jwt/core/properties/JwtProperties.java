@@ -1,11 +1,7 @@
-package xyz.catuns.spring.jwt.autoconfigure.properties;
+package xyz.catuns.spring.jwt.core.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.NestedConfigurationProperty;
-import xyz.catuns.spring.jwt.auth.properties.JwtAuthProperties;
-import xyz.catuns.spring.jwt.domain.properties.JwtDomainProperties;
-import xyz.catuns.spring.jwt.security.properties.JwtSecurityProperties;
 
 import java.time.Duration;
 
@@ -39,7 +35,7 @@ public class JwtProperties {
     /*
      * Jwt Entity Domain Properties
      */
-    @NestedConfigurationProperty
-    private JwtDomainProperties entity = new JwtDomainProperties();
+//    @NestedConfigurationProperty
+//    private JwtDomainProperties entity = new JwtDomainProperties();
 
 }

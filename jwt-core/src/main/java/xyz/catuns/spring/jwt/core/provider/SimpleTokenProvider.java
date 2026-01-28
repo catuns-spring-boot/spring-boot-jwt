@@ -8,6 +8,7 @@ import lombok.Setter;
 import xyz.catuns.spring.jwt.core.exception.JwtSecurityException;
 import xyz.catuns.spring.jwt.core.exception.TokenValidationException;
 import xyz.catuns.spring.jwt.core.model.JwtToken;
+import xyz.catuns.spring.jwt.core.properties.JwtProperties;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +16,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
 
-public abstract class TokenProviderImpl<T> implements TokenProvider<T> {
+public class SimpleTokenProvider<T> implements TokenProvider<T> {
 
     protected final String secret;
     protected final Duration expiration;
@@ -31,7 +32,17 @@ public abstract class TokenProviderImpl<T> implements TokenProvider<T> {
     @Setter
     private TokenValidator<T> validator;
 
-    public TokenProviderImpl(String secret, Duration expiration, String issuer, TokenGenerator<T> customizer, TokenValidator<T> validator) {
+    public SimpleTokenProvider(JwtProperties jwtProperties, TokenGenerator<T> customizer, TokenValidator<T> validator) {
+        this(
+                jwtProperties.getSecret(),
+                jwtProperties.getExpiration(),
+                jwtProperties.getIssuer(),
+                customizer,
+                validator
+        );
+    }
+
+    public SimpleTokenProvider(String secret, Duration expiration, String issuer, TokenGenerator<T> customizer, TokenValidator<T> validator) {
         if (secret == null || secret.isEmpty()) {
             throw new JwtSecurityException("missing secret");
         }
@@ -42,9 +53,6 @@ public abstract class TokenProviderImpl<T> implements TokenProvider<T> {
         this.validator = validator;
     }
 
-    public TokenProviderImpl(String secret, Duration expiration, String issuer, TokenValidator<T> validator) {
-        this(secret, expiration, issuer, TokenGenerator.withDefaults(), validator);
-    }
 
     @Override
     public JwtToken generate(T claims) {
