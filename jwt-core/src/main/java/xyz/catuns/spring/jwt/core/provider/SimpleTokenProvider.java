@@ -32,6 +32,10 @@ public class SimpleTokenProvider<T> implements TokenProvider<T> {
     @Setter
     private TokenValidator<T> validator;
 
+    public SimpleTokenProvider(JwtMetadata jwtProperties) {
+        this(jwtProperties, TokenGenerator.withDefaults(), TokenValidator.identity());
+    }
+
     public SimpleTokenProvider(JwtMetadata jwtProperties, TokenGenerator<T> customizer, TokenValidator<T> validator) {
         this(
                 jwtProperties.getSecret(),
@@ -42,6 +46,9 @@ public class SimpleTokenProvider<T> implements TokenProvider<T> {
         );
     }
 
+    public SimpleTokenProvider(String secret, Duration expiration, String issuer) {
+        this(secret, expiration, issuer, TokenGenerator.withDefaults(), TokenValidator.identity());
+    }
     public SimpleTokenProvider(String secret, Duration expiration, String issuer, TokenGenerator<T> customizer, TokenValidator<T> validator) {
         if (secret == null || secret.isEmpty()) {
             throw new JwtSecurityException("missing secret");
