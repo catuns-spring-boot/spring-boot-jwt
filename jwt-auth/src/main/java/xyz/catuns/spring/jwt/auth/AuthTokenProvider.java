@@ -4,7 +4,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import xyz.catuns.spring.jwt.core.properties.JwtProperties;
+import xyz.catuns.spring.jwt.core.properties.JwtMetadata;
 import xyz.catuns.spring.jwt.core.provider.TokenGenerator;
 import xyz.catuns.spring.jwt.core.provider.SimpleTokenProvider;
 import xyz.catuns.spring.jwt.core.provider.TokenValidator;
@@ -50,10 +50,10 @@ public class AuthTokenProvider extends SimpleTokenProvider<Authentication> {
         super(secret, expiration, issuer, customizer, validator);
     }
 
-    public AuthTokenProvider(JwtProperties properties) {
+    public AuthTokenProvider(JwtMetadata properties) {
         this(properties, defaultTokenGenerator(), defaultTokenValidator());
     }
-    public AuthTokenProvider(JwtProperties properties, TokenGenerator<Authentication> customizer, TokenValidator<Authentication> validator) {
+    public AuthTokenProvider(JwtMetadata properties, TokenGenerator<Authentication> customizer, TokenValidator<Authentication> validator) {
         super(properties, customizer, validator);
     }
 

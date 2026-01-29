@@ -8,7 +8,7 @@ import lombok.Setter;
 import xyz.catuns.spring.jwt.core.exception.JwtSecurityException;
 import xyz.catuns.spring.jwt.core.exception.TokenValidationException;
 import xyz.catuns.spring.jwt.core.model.JwtToken;
-import xyz.catuns.spring.jwt.core.properties.JwtProperties;
+import xyz.catuns.spring.jwt.core.properties.JwtMetadata;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -32,7 +32,7 @@ public class SimpleTokenProvider<T> implements TokenProvider<T> {
     @Setter
     private TokenValidator<T> validator;
 
-    public SimpleTokenProvider(JwtProperties jwtProperties, TokenGenerator<T> customizer, TokenValidator<T> validator) {
+    public SimpleTokenProvider(JwtMetadata jwtProperties, TokenGenerator<T> customizer, TokenValidator<T> validator) {
         this(
                 jwtProperties.getSecret(),
                 jwtProperties.getExpiration(),

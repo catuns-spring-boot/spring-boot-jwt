@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import xyz.catuns.spring.jwt.auth.AuthTokenProvider;
-import xyz.catuns.spring.jwt.core.properties.JwtProperties;
+import xyz.catuns.spring.jwt.autoconfigure.properties.JwtProperties;
 import xyz.catuns.spring.jwt.core.provider.TokenProvider;
 
 /**
