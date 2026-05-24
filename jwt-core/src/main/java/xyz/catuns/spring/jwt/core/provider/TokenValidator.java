@@ -7,9 +7,9 @@ import java.util.function.Function;
 @FunctionalInterface
 public interface TokenValidator<T> extends Function<Claims, T> {
 
+    @SuppressWarnings("unchecked")
     static <T> TokenValidator<T> identity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'identity'");
+        return claims -> (T) claims;
     }
 
 }

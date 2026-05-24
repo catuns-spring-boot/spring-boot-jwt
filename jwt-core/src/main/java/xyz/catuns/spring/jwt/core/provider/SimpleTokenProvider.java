@@ -30,7 +30,7 @@ public class SimpleTokenProvider<T> implements TokenProvider<T> {
      * Set customizer prior to token generation
      */
     @Setter
-    private TokenValidator<T> validator;
+    protected TokenValidator<T> validator;
 
     public SimpleTokenProvider(JwtMetadata jwtProperties) {
         this(jwtProperties, TokenGenerator.withDefaults(), TokenValidator.identity());
@@ -98,6 +98,64 @@ public class SimpleTokenProvider<T> implements TokenProvider<T> {
 
     protected SecretKey getSecretKey() {
         return Keys.hmacShaKeyFor(this.secret.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static <T> Builder<T> builder(String secret) {
+        return new Builder<>(secret);
+    }
+    public static <T> Builder<T> builder(JwtMetadata properties) {
+        return new Builder<>(properties);
+    }
+
+    public static final class Builder<T> {
+
+        private final String secret;
+        private Duration expiration = Duration.ofHours(10);
+        private String issuer;
+        private TokenGenerator<T> customizer = TokenGenerator.withDefaults();
+        private TokenValidator<T> validator = TokenValidator.identity();
+
+        private Builder(String secret) {
+            if (secret == null || secret.isEmpty()) {
+                throw new JwtSecurityException("missing secret");
+            }
+            this.secret = secret;
+        }
+
+        private Builder(JwtMetadata properties) {
+            this(properties.getSecret());
+            this.jwtProperties(properties);
+        }
+
+        public Builder<T> jwtProperties(JwtMetadata properties) {
+            this.expiration = properties.getExpiration();
+            this.issuer = properties.getIssuer();
+            return this;
+        }
+
+        public Builder<T> expiration(Duration expiration) {
+            this.expiration = expiration;
+            return this;
+        }
+
+        public Builder<T> issuer(String issuer) {
+            this.issuer = issuer;
+            return this;
+        }
+
+        public Builder<T> customizer(TokenGenerator<T> customizer) {
+            this.customizer = customizer;
+            return this;
+        }
+
+        public Builder<T> validator(TokenValidator<T> validator) {
+            this.validator = validator;
+            return this;
+        }
+
+        public SimpleTokenProvider<T> build() {
+            return new SimpleTokenProvider<>(secret, expiration, issuer, customizer, validator);
+        }
     }
 
 }
