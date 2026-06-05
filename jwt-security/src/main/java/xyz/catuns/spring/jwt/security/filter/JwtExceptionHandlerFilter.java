@@ -11,7 +11,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import xyz.catuns.spring.jwt.security.exception.JwtSecurityException;
+import xyz.catuns.spring.jwt.core.exception.JwtSecurityException;
 
 import java.io.IOException;
 

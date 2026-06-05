@@ -1,0 +1,58 @@
+name: Send Discord notification
+description: Sends a Discord message as a notification of the job's outcome
+inputs:
+  webhook-url:
+    description: 'Discord Webhook URL'
+    required: true
+  status:
+    description: 'Status of the job'
+    required: true
+  run-name:
+    description: 'Name of the run to include in the notification'
+    default: ${{ format('{0} {1}', github.ref_name, github.job) }}
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        echo "RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> "$GITHUB_ENV"
+    - shell: bash
+      if: ${{ inputs.status == 'success' }}
+      run: |
+        curl -X POST '${{ inputs.webhook-url }}' \
+          -H 'Content-Type: application/json' \
+          -d '{
+            "embeds": [{
+              "title": "✅ Deployment Successful",
+              "description": "[${{ inputs.run-name }}](${{ env.RUN_URL }}) completed successfully",
+              "color": 3066993,
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%S.000Z)'"
+            }]
+          }' || true
+    - shell: bash
+      if: ${{ inputs.status == 'failure' }}
+      run: |
+        curl -X POST '${{ inputs.webhook-url }}' \
+          -H 'Content-Type: application/json' \
+          -d '{
+            "content": "@here",
+            "embeds": [{
+              "title": "❌ Deployment Failed",
+              "description": "**[${{ inputs.run-name }}](${{ env.RUN_URL }}) has failed**",
+              "color": 15158332,
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%S.000Z)'"
+            }]
+          }' || true
+    - shell: bash
+      if: ${{ inputs.status == 'cancelled' }}
+      run: |
+        curl -X POST '${{ inputs.webhook-url }}' \
+          -H 'Content-Type: application/json' \
+          -d '{
+            "embeds": [{
+              "title": "⚠️ Deployment Cancelled",
+              "description": "[${{ inputs.run-name }}](${{ env.RUN_URL }}) was cancelled",
+              "color": 9807270,
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%S.000Z)'"
+            }]
+          }' || true

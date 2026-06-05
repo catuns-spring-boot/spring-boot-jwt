@@ -1,7 +1,6 @@
 package xyz.catuns.spring.jwt.autoconfigure;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -10,7 +9,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -21,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import xyz.catuns.spring.jwt.auth.properties.JwtAuthProperties;
 import xyz.catuns.spring.jwt.auth.provider.UsernamePwdAuthenticationProvider;
 import xyz.catuns.spring.jwt.auth.service.UserEntityService;
-import xyz.catuns.spring.jwt.autoconfigure.properties.JwtProperties;
 import xyz.catuns.spring.jwt.domain.DomainMetadata;
 import xyz.catuns.spring.jwt.domain.repository.UserEntityRepository;
 
@@ -71,11 +68,6 @@ public class JwtAuthenticationAutoConfiguration {
             DomainMetadata domainMetadata
     ) {
         Class<?> domainClazz = domainMetadata.getUserRepositoryClass();
-//        if (domainClazz == Object.class) {
-//            throw new IllegalStateException(
-//                    "UserEntityRepository class must be specified in @EnableJwtSecurity when using UserEntityService"
-//            );
-//        }
 
         Class<?> beanClazz = userEntityRepository.getClass();
         if (!domainClazz.isAssignableFrom(beanClazz)) {

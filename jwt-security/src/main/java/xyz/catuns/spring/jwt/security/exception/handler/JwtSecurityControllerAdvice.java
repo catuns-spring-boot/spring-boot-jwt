@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import xyz.catuns.spring.jwt.core.exception.JwtSecurityException;
 
 import java.net.URI;
 import java.time.Instant;
@@ -14,9 +15,12 @@ import java.time.Instant;
 @RestControllerAdvice
 public class JwtSecurityControllerAdvice {
 
-    @ExceptionHandler({AuthenticationException.class})
-    public ResponseEntity<ProblemDetail> handleAuthenticationException(
-            AuthenticationException e, HttpServletRequest request
+
+    @ExceptionHandler({
+            JwtSecurityException.class,
+            AuthenticationException.class})
+    public ResponseEntity<ProblemDetail> handleUnauthorizedExceptions(
+            RuntimeException e, HttpServletRequest request
     ) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
                 HttpStatus.UNAUTHORIZED, e.getMessage());

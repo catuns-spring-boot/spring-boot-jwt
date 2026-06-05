@@ -1,4 +1,5 @@
 package xyz.catuns.spring.jwt.core.exception;
 
-public class MissingSecretException extends Throwable {
+@Deprecated(forRemoval=true)
+public class MissingSecretException extends JwtSecurityException {
 }

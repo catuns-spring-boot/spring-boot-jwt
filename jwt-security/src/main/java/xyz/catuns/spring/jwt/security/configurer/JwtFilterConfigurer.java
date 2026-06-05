@@ -7,7 +7,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import xyz.catuns.spring.jwt.core.TokenProvider;
+import xyz.catuns.spring.jwt.core.provider.TokenProvider;
 import xyz.catuns.spring.jwt.core.model.JwtToken;
 import xyz.catuns.spring.jwt.security.filter.JwtExceptionHandlerFilter;
 import xyz.catuns.spring.jwt.security.filter.JwtTokenGeneratorFilter;
