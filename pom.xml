@@ -23,9 +23,9 @@
     </licenses>
     <properties>
         <revision>1.0.4-SNAPSHOT</revision>
-        <git.url>https://github.com/catuns-spring-boot/effective-lamp-initializr</git.url>
-        <git.connection>scm:git:https://github.com/catuns-spring-boot/effective-lamp-initializr</git.connection>
-        <git.developerConnection>scm:git:ssh://git@github.com/catuns-spring-boot/effective-lamp-initializr.git</git.developerConnection>
+        <git.url>https://github.com/catuns-spring-boot/spring-boot-jwt</git.url>
+        <git.connection>scm:git:https://github.com/catuns-spring-boot/spring-boot-jwt</git.connection>
+        <git.developerConnection>scm:git:ssh://git@github.com/catuns-spring-boot/spring-boot-jwt.git</git.developerConnection>
         <main.basedir>${basedir}</main.basedir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
@@ -47,39 +47,12 @@
     </scm>
     <developers>
         <developer>
-            <name>Devin</name>
-            <email>ask@catuns.xyz</email>
+            <name>Devin Catuns</name>
+            <email>devin@catuns.xyz</email>
             <organization>DCAT Technologies.</organization>
             <organizationUrl>https://www.catuns.xyz</organizationUrl>
         </developer>
     </developers>
-
-    <profiles>
-        <profile>
-            <id>repolite</id>
-            <distributionManagement>
-                <repository>
-                    <id>repolite-releases</id>
-                    <name>Catuns RepoLite releases</name>
-                    <url>https://repolite.catuns.xyz/releases</url>
-                </repository>
-                <snapshotRepository>
-                    <id>repolite-snapshots</id>
-                    <name>Catuns RepoLite</name>
-                    <url>https://repolite.catuns.xyz/snapshots</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
-
-    </profiles>
-
-    <distributionManagement>
-        <repository>
-            <id>jwt-starter</id>
-            <name>Devin Catuns' Spring Boot Maven Packages</name>
-            <url>https://maven.pkg.github.com/catuns-spring-boot/spring-boot-jwt</url>
-        </repository>
-    </distributionManagement>
 
     <build>
         <pluginManagement>
@@ -92,6 +65,15 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.9.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
@@ -136,6 +118,92 @@
                 <artifactId>maven-install-plugin</artifactId>
                 <version>3.1.4</version>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.11.2</version>
+                <configuration>
+                    <doclint>none</doclint>
+                    <quiet>true</quiet>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>github</id>
+            <distributionManagement>
+                <repository>
+                    <id>jwt-starter</id>
+                    <name>Devin Catuns' Spring Boot Maven Packages</name>
+                    <url>https://maven.pkg.github.com/catuns-spring-boot/spring-boot-jwt</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>repolite</id>
+            <distributionManagement>
+                <repository>
+                    <id>repolite-releases</id>
+                    <name>Catuns RepoLite releases</name>
+                    <url>https://repolite.catuns.xyz/releases</url>
+                </repository>
+                <snapshotRepository>
+                    <id>repolite-snapshots</id>
+                    <name>Catuns RepoLite</name>
+                    <url>https://repolite.catuns.xyz/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.2.7</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
